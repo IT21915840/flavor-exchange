@@ -73,6 +73,24 @@ const RecipeDetails = () => {
             ))}
             </Stack>
 
+            <Typography variant="h6" mt={3}>Ingredient Substitutions:</Typography>
+            <ul>
+            {recipe.ingredients.map((ing, idx) => {
+                const sub = {
+                milk: 'almond milk',
+                butter: 'coconut oil',
+                eggs: 'chia seeds',
+                cheese: 'chashew cheese',
+                flour: 'almond flour',
+                }[ing.toLowerCase()];
+                return (
+                <li key={idx}>
+                    {ing} {sub ? `→ try using ${sub}` : ''}
+                </li>
+                );
+            })}
+            </ul>
+
             <Typography variant="h6" mt={3}>Instructions:</Typography>
             <Typography>{recipe.instructions}</Typography>
 
