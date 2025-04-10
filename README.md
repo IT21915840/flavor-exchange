@@ -4,7 +4,7 @@ A modern React-based web application that lets users browse, add and save their 
 
 ![Home Page](screenshots/home.png)
 
-
+![Recipe Details](screenshots/details.png)
 
 ---
 
