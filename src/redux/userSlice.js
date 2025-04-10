@@ -1,12 +1,12 @@
 // src/redux/userSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
-const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+const savedUser = JSON.parse(localStorage.getItem('user'));
 
 const initialState = {
-  isAuthenticated: false,
-  user: null,
-  favorites: savedFavorites,
+  isAuthenticated: !!savedUser,
+  user: savedUser,
+  favorites: JSON.parse(localStorage.getItem('favorites')) || [],
 };
 
 const userSlice = createSlice({
@@ -16,11 +16,13 @@ const userSlice = createSlice({
     login(state, action) {
       state.isAuthenticated = true;
       state.user = action.payload;
+      localStorage.setItem('user', JSON.stringify(action.payload));
     },
     logout(state) {
       state.isAuthenticated = false;
       state.user = null;
       state.favorites = [];
+      localStorage.removeItem('user');
       localStorage.removeItem('favorites');
     },
     toggleFavorite(state, action) {
@@ -30,8 +32,6 @@ const userSlice = createSlice({
       } else {
         state.favorites.push(recipeId);
       }
-
-      // Persist updated favorites
       localStorage.setItem('favorites', JSON.stringify(state.favorites));
     },
   },

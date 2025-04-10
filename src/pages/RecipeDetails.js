@@ -22,9 +22,6 @@ const RecipeDetails = () => {
     const currentUser = useSelector(state => state.user.user);
     const [recipe, setRecipe] = useState(null);
     
-    const isFavorite = favorites.includes(parseInt(id));
-    const isOwner = currentUser?.username === recipe.owner;
-    
     const navigate = useNavigate();
     
     useEffect(() => {
@@ -34,6 +31,9 @@ const RecipeDetails = () => {
     }, [id]);
 
     if (!recipe) return <Typography>Loading recipe...</Typography>;
+
+    const isFavorite = favorites.includes(parseInt(id));
+    const isOwner = currentUser?.username === recipe.owner;
 
     return (
         <Card sx={{ maxWidth: 700, margin: '2rem auto', padding: '1rem' }}>
@@ -67,35 +67,26 @@ const RecipeDetails = () => {
             {isFavorite ? 'Remove from Favorites ❤️' : 'Save to Favorites 🤍'}
             </Button>
 
-        <Button
-        variant={isFavorite ? 'contained' : 'outlined'}
-        color="secondary"
-        onClick={() => dispatch(toggleFavorite(recipe.id))}
-        sx={{ mt: 3 }}
-        >
-        {isFavorite ? 'Remove from Favorites ❤️' : 'Save to Favorites 🤍'}
-        </Button>
-
-        {isOwner && (
-        <Stack direction="row" spacing={2} mt={3}>
-            <Button variant="outlined" color="primary" onClick={() => navigate(`/edit/${recipe.id}`)}>
-            Edit Recipe ✏️
-            </Button>
-            <Button
-            variant="outlined"
-            color="error"
-            onClick={async () => {
-                if (window.confirm("Are you sure you want to delete this recipe?")) {
-                await axios.delete(`http://localhost:3001/recipes/${recipe.id}`);
-                alert("Recipe deleted.");
-                navigate('/');
-                }
-            }}
-            >
-            Delete Recipe 🗑️
-            </Button>
-        </Stack>
-      )}
+            {isOwner && (
+            <Stack direction="row" spacing={2} mt={3}>
+                <Button variant="outlined" color="primary" onClick={() => navigate(`/edit/${recipe.id}`)}>
+                Edit Recipe ✏️
+                </Button>
+                <Button
+                variant="outlined"
+                color="error"
+                onClick={async () => {
+                    if (window.confirm("Are you sure you want to delete this recipe?")) {
+                    await axios.delete(`http://localhost:3001/recipes/${recipe.id}`);
+                    alert("Recipe deleted.");
+                    navigate('/');
+                    }
+                }}
+                >
+                Delete Recipe 🗑️
+                </Button>
+            </Stack>
+        )}
 
         </CardContent>
         </Card>
