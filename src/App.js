@@ -12,7 +12,7 @@ import { logout } from './redux/userSlice';
 import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 
-function App() {
+function App({ toggleTheme }) {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.user);
   const isAuthenticated = useSelector(state => state.user.isAuthenticated);
@@ -63,6 +63,11 @@ function App() {
               Login
             </Button>
           )}
+
+          <Button color="inherit" onClick={toggleTheme}>
+          🌓 Toggle Theme
+          </Button>
+          
         </Toolbar>
       </AppBar>
 
