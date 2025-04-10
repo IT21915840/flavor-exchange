@@ -21,8 +21,26 @@ const RecipeDetails = () => {
     const favorites = useSelector(state => state.user.favorites);
     const currentUser = useSelector(state => state.user.user);
     const [recipe, setRecipe] = useState(null);
+    const [timeLeft, setTimeLeft] = useState(null);
+
     
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (timeLeft === null) return;
+        if (timeLeft === 0) {
+          alert("Time's up!");
+          setTimeLeft(null);
+          return;
+        }
+      
+        const timer = setTimeout(() => {
+          setTimeLeft(prev => prev - 1);
+        }, 1000);
+      
+        return () => clearTimeout(timer);
+      }, [timeLeft]);
+      
     
     useEffect(() => {
         axios.get(`http://localhost:3001/recipes/${id}`)
@@ -66,6 +84,21 @@ const RecipeDetails = () => {
             >
             {isFavorite ? 'Remove from Favorites ❤️' : 'Save to Favorites 🤍'}
             </Button>
+
+            <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => setTimeLeft(recipe.cookingTime * 60)}
+            sx={{ mt: 3 }}
+            >
+            Start Cooking Timer ⏱
+            </Button>
+
+            {timeLeft !== null && (
+            <Typography variant="body2" sx={{ mt: 1 }}>
+                Time left: {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, '0')} mins
+            </Typography>
+            )}
 
             {isOwner && (
             <Stack direction="row" spacing={2} mt={3}>
