@@ -1,0 +1,14 @@
+{
+    "recipes": [
+      {
+        "id": 1,
+        "title": "Spaghetti Carbonara",
+        "ingredients": ["spaghetti", "eggs", "cheese", "bacon"],
+        "instructions": "Boil pasta, cook bacon, mix with eggs and cheese.",
+        "cookingTime": 30,
+        "rating": 4.5,
+        "image": "https://source.unsplash.com/featured/?spaghetti"
+      }
+    ]
+  }
+  
