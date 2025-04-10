@@ -1,26 +1,26 @@
-// src/pages/AddRecipe.js
-import React, { useState } from 'react';
+// src/pages/EditRecipe.js
+import React, { useEffect, useState } from 'react';
 import {
-  TextField,
-  Button,
-  Typography,
-  Box,
-  Stack,
+  TextField, Button, Typography, Box, Stack
 } from '@mui/material';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
-const AddRecipe = () => {
-  const [form, setForm] = useState({
-    title: '',
-    ingredients: '',
-    instructions: '',
-    image: '',
-    cookingTime: '',
-    rating: '',
-  });
-
+const EditRecipe = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
+  const [form, setForm] = useState(null);
+
+  useEffect(() => {
+    axios.get(`http://localhost:3001/recipes/${id}`)
+      .then(res => {
+        const recipe = res.data;
+        setForm({
+          ...recipe,
+          ingredients: recipe.ingredients.join(', '),
+        });
+      });
+  }, [id]);
 
   const handleChange = (e) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -28,28 +28,22 @@ const AddRecipe = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    const newRecipe = {
+    const updated = {
       ...form,
       ingredients: form.ingredients.split(',').map(i => i.trim()),
       cookingTime: parseInt(form.cookingTime),
       rating: parseFloat(form.rating),
-      owner: JSON.parse(localStorage.getItem('user'))?.username || "anonymous"
     };
-  
-    try {
-      await axios.post('http://localhost:3001/recipes', newRecipe);
-      alert('Recipe added!');
-      navigate('/');
-    } catch (error) {
-      console.error('Error adding recipe:', error);
-    }
+    await axios.put(`http://localhost:3001/recipes/${id}`, updated);
+    alert("Recipe updated!");
+    navigate(`/recipe/${id}`);
   };
-  
+
+  if (!form) return <Typography>Loading...</Typography>;
 
   return (
     <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4 }}>
-      <Typography variant="h4" gutterBottom>Add New Recipe</Typography>
+      <Typography variant="h4" gutterBottom>Edit Recipe</Typography>
       <form onSubmit={handleSubmit}>
         <Stack spacing={2}>
           <TextField name="title" label="Title" fullWidth required value={form.title} onChange={handleChange} />
@@ -58,11 +52,11 @@ const AddRecipe = () => {
           <TextField name="image" label="Image URL" fullWidth value={form.image} onChange={handleChange} />
           <TextField name="cookingTime" label="Cooking Time (minutes)" fullWidth required type="number" value={form.cookingTime} onChange={handleChange} />
           <TextField name="rating" label="Rating (1-5)" fullWidth type="number" inputProps={{ step: 0.1 }} value={form.rating} onChange={handleChange} />
-          <Button type="submit" variant="contained">Add Recipe</Button>
+          <Button type="submit" variant="contained">Save Changes</Button>
         </Stack>
       </form>
     </Box>
   );
 };
 
-export default AddRecipe;
+export default EditRecipe;

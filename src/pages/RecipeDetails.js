@@ -13,57 +13,93 @@ import {
   Chip,
   Stack,
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const RecipeDetails = () => {
-  const { id } = useParams();
-  const dispatch = useDispatch();
-  const favorites = useSelector(state => state.user.favorites);
-  const [recipe, setRecipe] = useState(null);
+    const { id } = useParams();
+    const dispatch = useDispatch();
+    const favorites = useSelector(state => state.user.favorites);
+    const currentUser = useSelector(state => state.user.user);
+    const [recipe, setRecipe] = useState(null);
+    
+    const isFavorite = favorites.includes(parseInt(id));
+    const isOwner = currentUser?.username === recipe.owner;
+    
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        axios.get(`http://localhost:3001/recipes/${id}`)
+        .then(response => setRecipe(response.data))
+        .catch(err => console.error("Failed to load recipe", err));
+    }, [id]);
 
-  const isFavorite = favorites.includes(parseInt(id));
+    if (!recipe) return <Typography>Loading recipe...</Typography>;
 
-  useEffect(() => {
-    axios.get(`http://localhost:3001/recipes/${id}`)
-      .then(response => setRecipe(response.data))
-      .catch(err => console.error("Failed to load recipe", err));
-  }, [id]);
+    return (
+        <Card sx={{ maxWidth: 700, margin: '2rem auto', padding: '1rem' }}>
+        <CardMedia
+            component="img"
+            height="300"
+            image={recipe.image || 'https://via.placeholder.com/300'}
+            alt={recipe.title}
+        />
+        <CardContent>
+            <Typography variant="h4" gutterBottom>{recipe.title}</Typography>
+            <Typography variant="subtitle1">Cooking Time: ⏱ {recipe.cookingTime} mins</Typography>
+            <Typography variant="subtitle1">Rating: ⭐ {recipe.rating || 'N/A'}</Typography>
 
-  if (!recipe) return <Typography>Loading recipe...</Typography>;
+            <Typography variant="h6" mt={3}>Ingredients:</Typography>
+            <Stack direction="row" spacing={1} flexWrap="wrap">
+            {recipe.ingredients?.map((ing, idx) => (
+                <Chip key={idx} label={ing} />
+            ))}
+            </Stack>
 
-  return (
-    <Card sx={{ maxWidth: 700, margin: '2rem auto', padding: '1rem' }}>
-      <CardMedia
-        component="img"
-        height="300"
-        image={recipe.image || 'https://via.placeholder.com/300'}
-        alt={recipe.title}
-      />
-      <CardContent>
-        <Typography variant="h4" gutterBottom>{recipe.title}</Typography>
-        <Typography variant="subtitle1">Cooking Time: ⏱ {recipe.cookingTime} mins</Typography>
-        <Typography variant="subtitle1">Rating: ⭐ {recipe.rating || 'N/A'}</Typography>
+            <Typography variant="h6" mt={3}>Instructions:</Typography>
+            <Typography>{recipe.instructions}</Typography>
 
-        <Typography variant="h6" mt={3}>Ingredients:</Typography>
-        <Stack direction="row" spacing={1} flexWrap="wrap">
-          {recipe.ingredients?.map((ing, idx) => (
-            <Chip key={idx} label={ing} />
-          ))}
-        </Stack>
-
-        <Typography variant="h6" mt={3}>Instructions:</Typography>
-        <Typography>{recipe.instructions}</Typography>
+            <Button
+            variant={isFavorite ? 'contained' : 'outlined'}
+            color="secondary"
+            onClick={() => dispatch(toggleFavorite(recipe.id))}
+            sx={{ mt: 3 }}
+            >
+            {isFavorite ? 'Remove from Favorites ❤️' : 'Save to Favorites 🤍'}
+            </Button>
 
         <Button
-          variant={isFavorite ? 'contained' : 'outlined'}
-          color="secondary"
-          onClick={() => dispatch(toggleFavorite(recipe.id))}
-          sx={{ mt: 3 }}
+        variant={isFavorite ? 'contained' : 'outlined'}
+        color="secondary"
+        onClick={() => dispatch(toggleFavorite(recipe.id))}
+        sx={{ mt: 3 }}
         >
-          {isFavorite ? 'Remove from Favorites ❤️' : 'Save to Favorites 🤍'}
+        {isFavorite ? 'Remove from Favorites ❤️' : 'Save to Favorites 🤍'}
         </Button>
-      </CardContent>
-    </Card>
-  );
+
+        {isOwner && (
+        <Stack direction="row" spacing={2} mt={3}>
+            <Button variant="outlined" color="primary" onClick={() => navigate(`/edit/${recipe.id}`)}>
+            Edit Recipe ✏️
+            </Button>
+            <Button
+            variant="outlined"
+            color="error"
+            onClick={async () => {
+                if (window.confirm("Are you sure you want to delete this recipe?")) {
+                await axios.delete(`http://localhost:3001/recipes/${recipe.id}`);
+                alert("Recipe deleted.");
+                navigate('/');
+                }
+            }}
+            >
+            Delete Recipe 🗑️
+            </Button>
+        </Stack>
+      )}
+
+        </CardContent>
+        </Card>
+    );
 };
 
 export default RecipeDetails;

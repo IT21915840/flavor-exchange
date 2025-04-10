@@ -3,6 +3,7 @@ import HomePage from './pages/HomePage';
 import RecipeDetails from './pages/RecipeDetails';
 import Login from './pages/Login';
 import AddRecipe from './pages/AddRecipe';
+import EditRecipe from './pages/EditRecipe';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/recipe/:id" element={<RecipeDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/add" element={<AddRecipe />} />
+        <Route path="/edit/:id" element={<EditRecipe />} />
       </Routes>
     </BrowserRouter>
   );
