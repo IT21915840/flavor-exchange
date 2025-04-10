@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import AddRecipe from './pages/AddRecipe';
 import EditRecipe from './pages/EditRecipe';
 import PrivateRoute from './components/PrivateRoute';
+import FavoritesPage from './pages/FavoritesPage';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from './redux/userSlice';
@@ -37,6 +38,17 @@ function App() {
             </Button>
           )}
 
+          {isAuthenticated && (
+            <Button
+              color="inherit"
+              component={Link}
+              to="/favorites"
+              sx={{ marginRight: 2 }}
+            >
+              ❤️ Favorites
+            </Button>
+          )}
+
           {isAuthenticated ? (
             <>
               <Typography variant="body1" sx={{ marginRight: 2 }}>
@@ -60,6 +72,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/add" element={<PrivateRoute><AddRecipe /></PrivateRoute>} />
         <Route path="/edit/:id" element={<PrivateRoute><EditRecipe /></PrivateRoute>} />
+        <Route path="/favorites" element={<PrivateRoute><FavoritesPage /></PrivateRoute>} />
       </Routes>
     </BrowserRouter>
   );
