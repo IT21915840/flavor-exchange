@@ -25,6 +25,18 @@ function App() {
               Flavor Exchange
             </Link>
           </Typography>
+
+          {isAuthenticated && (
+            <Button
+              color="inherit"
+              component={Link}
+              to="/add"
+              sx={{ marginRight: 2 }}
+            >
+              + Add Recipe
+            </Button>
+          )}
+
           {isAuthenticated ? (
             <>
               <Typography variant="body1" sx={{ marginRight: 2 }}>
