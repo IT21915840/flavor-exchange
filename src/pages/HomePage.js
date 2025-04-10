@@ -34,7 +34,7 @@ const HomePage = () => {
   );
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
       <Typography variant="h4" gutterBottom>Recipe Feed</Typography>
       <TextField
         fullWidth
@@ -46,21 +46,44 @@ const HomePage = () => {
       />
       <Grid container spacing={3}>
         {filteredRecipes.map(recipe => (
-          <Grid item xs={12} sm={6} md={4} key={recipe.id}>
+          <Grid item key={recipe.id}>
             <Link to={`/recipe/${recipe.id}`} style={{ textDecoration: 'none' }}>
-              <Card>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={recipe.image || 'https://via.placeholder.com/150'}
-                  alt={recipe.title}
-                />
-                <CardContent>
-                  <Typography variant="h6">{recipe.title}</Typography>
-                  <Typography variant="body2">⏱ {recipe.cookingTime} mins</Typography>
-                  <Typography variant="body2">⭐ {recipe.rating || 'N/A'}</Typography>
-                </CardContent>
-              </Card>
+            <Card
+              sx={{
+                height: 300,
+                width: 250,                
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: 6,
+                },
+              }}
+            >
+              <CardMedia
+                component="img"
+                height="150"
+                image={recipe.image || 'https://via.placeholder.com/150'}
+                alt={recipe.title}
+                sx={{ objectFit: 'cover' }}
+              />
+              <CardContent sx={{ flexGrow: 1 }}>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}
+                >
+                  {recipe.title}
+                </Typography>
+                <Typography variant="body2">⏱ {recipe.cookingTime} mins</Typography>
+                <Typography variant="body2">⭐ {recipe.rating || 'N/A'}</Typography>
+              </CardContent>
+            </Card>
             </Link>
           </Grid>
         ))}

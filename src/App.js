@@ -10,7 +10,7 @@ import FavoritesPage from './pages/FavoritesPage';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from './redux/userSlice';
 import { Link } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, } from '@mui/material';
 
 function App({ toggleTheme }) {
   const dispatch = useDispatch();
@@ -67,7 +67,7 @@ function App({ toggleTheme }) {
           <Button color="inherit" onClick={toggleTheme}>
           🌓 Toggle Theme
           </Button>
-          
+
         </Toolbar>
       </AppBar>
 

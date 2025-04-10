@@ -15,15 +15,59 @@
       "image": "https://source.unsplash.com/featured/?spaghetti"
     },
     {
-      "id": "5081",
-      "title": "d",
+      "id": "2",
+      "title": "Chicken Curry",
       "ingredients": [
-        "d"
+        "chicken",
+        "curry powder",
+        "coconut milk",
+        "rice"
       ],
-      "instructions": "d",
-      "image": "d",
-      "cookingTime": 2,
-      "rating": 1
+      "instructions": "Cook chicken, add curry powder and coconut milk, serve with rice.",
+      "cookingTime": 45,
+      "rating": 4.7,
+      "image": "https://source.unsplash.com/featured/?chicken-curry"
+    },
+    {
+      "id": "3",
+      "title": "Caesar Salad",
+      "ingredients": [
+        "romaine lettuce",
+        "croutons",
+        "parmesan cheese",
+        "Caesar dressing"
+      ],
+      "instructions": "Toss lettuce with croutons, cheese, and dressing.",
+      "cookingTime": 15,
+      "rating": 4.2,
+      "image": "https://source.unsplash.com/featured/?caesar-salad"
+    },
+    {
+      "id": "4",
+      "title": "Beef Tacos",
+      "ingredients": [
+        "ground beef",
+        "taco shells",
+        "lettuce",
+        "cheese"
+      ],
+      "instructions": "Cook beef, fill taco shells with beef, lettuce, and cheese.",
+      "cookingTime": 25,
+      "rating": 4.6,
+      "image": "https://source.unsplash.com/featured/?tacos"
+    },
+    {
+      "id": "5",
+      "title": "Vegetable Stir Fry",
+      "ingredients": [
+        "mixed vegetables",
+        "soy sauce",
+        "rice"
+      ],
+      "instructions": "Stir fry vegetables, add soy sauce, serve with rice.",
+      "cookingTime": 20,
+      "rating": 4.3,
+      "image": "https://source.unsplash.com/featured/?stir-fry"
     }
   ]
 }
