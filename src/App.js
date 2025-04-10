@@ -21,7 +21,11 @@ function App({ toggleTheme }) {
     <BrowserRouter>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          <Typography variant="h5" sx={{ flexGrow: 1, fontWeight: 'bold',
+          letterSpacing: 1,
+          fontSize: '1.8rem',
+          color: '#FFD700', 
+          fontFamily: 'Poppins, sans-serif', }}>
             <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
               Flavor Exchange
             </Link>

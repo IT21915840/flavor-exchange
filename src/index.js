@@ -13,6 +13,9 @@ const AppWrapper = () => {
   const theme = createTheme({
     palette: {
       mode: darkMode ? 'dark' : 'light',
+      primary: {
+        main: '#00796b',
+      },
     },
   });
 

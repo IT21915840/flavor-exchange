@@ -35,7 +35,13 @@ const HomePage = () => {
 
   return (
     <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-      <Typography variant="h4" gutterBottom>Recipe Feed</Typography>
+      <Typography variant="h3" align="center" sx={{
+      fontWeight: 'bold',
+      letterSpacing: 1,
+      color: '#00796b', 
+      fontFamily: 'Pacifico, cursive', 
+      mb: 4
+      }} >Discover Delicious Recipes</Typography>
       <TextField
         fullWidth
         label="Search recipes"
@@ -50,7 +56,7 @@ const HomePage = () => {
             <Link to={`/recipe/${recipe.id}`} style={{ textDecoration: 'none' }}>
             <Card
               sx={{
-                height: 300,
+                height: 270,
                 width: 250,                
                 display: 'flex',
                 flexDirection: 'column',
