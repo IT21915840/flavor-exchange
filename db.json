@@ -12,7 +12,7 @@
       "instructions": "Boil pasta, cook bacon, mix with eggs and cheese.",
       "cookingTime": 30,
       "rating": 4.5,
-      "image": "https://source.unsplash.com/featured/?spaghetti"
+      "image": "/assets/spaghetti-carbonara-1200.jpg"
     },
     {
       "id": "2",
@@ -26,7 +26,7 @@
       "instructions": "Cook chicken, add curry powder and coconut milk, serve with rice.",
       "cookingTime": 45,
       "rating": 4.7,
-      "image": "https://source.unsplash.com/featured/?chicken-curry"
+      "image": "/assets/46822-indian-chicken-curry-ii-DDMFS-4x3-39160aaa95674ee395b9d4609e3b0988.jpg"
     },
     {
       "id": "3",
@@ -40,7 +40,7 @@
       "instructions": "Toss lettuce with croutons, cheese, and dressing.",
       "cookingTime": 15,
       "rating": 4.2,
-      "image": "https://source.unsplash.com/featured/?caesar-salad"
+      "image": "/assets/caesar-salad.jpg"
     },
     {
       "id": "4",
@@ -54,7 +54,7 @@
       "instructions": "Cook beef, fill taco shells with beef, lettuce, and cheese.",
       "cookingTime": 25,
       "rating": 4.6,
-      "image": "https://source.unsplash.com/featured/?tacos"
+      "image": "/assets/bbq_tacos_1.jpg__900x739_q85_crop.jpg"
     },
     {
       "id": "5",
@@ -67,7 +67,7 @@
       "instructions": "Stir fry vegetables, add soy sauce, serve with rice.",
       "cookingTime": 20,
       "rating": 4.3,
-      "image": "https://source.unsplash.com/featured/?stir-fry"
+      "image": "/assets/Beef-and-Vegetable-Stir-Fry-16.jpg"
     }
   ]
 }
