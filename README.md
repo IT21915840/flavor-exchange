@@ -2,7 +2,8 @@
 
 A modern React-based web application that lets users browse, add and save their favorite recipes. Built as part of a Intern Front-End assignment.
 
-![screenshot](screenshots/Screenshot (26).png)
+![Home Page](screenshots/home.png)
+
 
 
 ---
