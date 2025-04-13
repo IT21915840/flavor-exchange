@@ -1,4 +1,3 @@
-// src/pages/EditRecipe.js
 import React, { useEffect, useState } from 'react';
 import {
   TextField, Button, Typography, Box, Stack

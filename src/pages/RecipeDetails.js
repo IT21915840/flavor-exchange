@@ -1,4 +1,3 @@
-// src/pages/RecipeDetails.js
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -23,7 +22,6 @@ const RecipeDetails = () => {
     const [recipe, setRecipe] = useState(null);
     const [timeLeft, setTimeLeft] = useState(null);
 
-    
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -94,23 +92,21 @@ const RecipeDetails = () => {
             <Typography variant="h6" mt={3}>Instructions:</Typography>
             <Typography>{recipe.instructions}</Typography>
 
+            <Stack direction="row" spacing={2} mt={3}>
             <Button
             variant={isFavorite ? 'contained' : 'outlined'}
             color="secondary"
-            onClick={() => dispatch(toggleFavorite(recipe.id))}
-            sx={{ mt: 3 }}
-            >
+            onClick={() => dispatch(toggleFavorite(parseInt(recipe.id)))}>
             {isFavorite ? 'Remove from Favorites ❤️' : 'Save to Favorites 🤍'}
             </Button>
-
+            
             <Button
             variant="outlined"
             color="primary"
-            onClick={() => setTimeLeft(recipe.cookingTime * 60)}
-            sx={{ mt: 3 }}
-            >
+            onClick={() => setTimeLeft(recipe.cookingTime * 60)}>
             Start Cooking Timer ⏱
             </Button>
+            </Stack>
 
             {timeLeft !== null && (
             <Typography variant="body2" sx={{ mt: 1 }}>
@@ -132,13 +128,11 @@ const RecipeDetails = () => {
                     alert("Recipe deleted.");
                     navigate('/');
                     }
-                }}
-                >
+                }}>
                 Delete Recipe 🗑️
                 </Button>
             </Stack>
         )}
-
         </CardContent>
         </Card>
     );

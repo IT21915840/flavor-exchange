@@ -38,7 +38,7 @@ A modern React-based web application that lets users browse, add and save their 
 ### 1. Clone the repos
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/flavor-exchange.git
+git clone https://github.com/IT21915840/flavor-exchange.git
 cd flavor-exchange
 
 ### 2. Install dependencies

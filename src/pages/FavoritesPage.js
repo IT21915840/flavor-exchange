@@ -1,4 +1,3 @@
-// src/pages/FavoritesPage.js
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
@@ -40,17 +39,36 @@ const FavoritesPage = () => {
       </Typography>
       <Grid container spacing={3}>
         {favoriteRecipes.length > 0 ? favoriteRecipes.map(recipe => (
-          <Grid item xs={12} sm={6} md={4} key={recipe.id}>
-            <Link to={`/recipe/${recipe.id}`} style={{ textDecoration: 'none' }}>
-              <Card>
+          <Grid item key={recipe.id} sx={{ display: 'flex' }}>
+            <Link to={`/recipe/${recipe.id}`} style={{ textDecoration: 'none', width: '100%' }}>
+              <Card
+                sx={{
+                  width: 250,
+                  height: 270,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  boxShadow: 3,
+                  transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                  '&:hover': {
+                    transform: 'translateY(-5px)',
+                    boxShadow: 6,
+                  },
+                }}
+              >
                 <CardMedia
                   component="img"
-                  height="140"
+                  height="150"
                   image={recipe.image || 'https://via.placeholder.com/150'}
                   alt={recipe.title}
+                  sx={{ objectFit: 'cover' }}
                 />
-                <CardContent>
-                  <Typography variant="h6">{recipe.title}</Typography>
+                <CardContent sx={{ flexGrow: 1 }}>
+                  <Typography variant="h6" sx={{
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}>{recipe.title}</Typography>
                   <Typography variant="body2">⏱ {recipe.cookingTime} mins</Typography>
                   <Typography variant="body2">⭐ {recipe.rating || 'N/A'}</Typography>
                 </CardContent>
